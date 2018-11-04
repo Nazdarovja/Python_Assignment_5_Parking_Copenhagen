@@ -34,11 +34,7 @@ def private_electric_avg_income_multi_plot(districts_list, private_by_district_l
     
 
 
-def plot_geo_json(data_df):
-
-    # load GeoJSON geometries for Copenhagen
-    with open('geo_json.json') as data_file:
-        cph_map = json.load(data_file)
+def plot_geo_json(data_df, cph_map_json, p_spots_json):
 
     from_df = data_df[data_df['vejstatus'] == 'Kommunevej']  # Bare til testing, der skal bruges gennemsnit af indkomst pr bydel
     df = from_df['bydel'].value_counts().reset_index()
@@ -47,7 +43,7 @@ def plot_geo_json(data_df):
     map = folium.Map(location=[55.671544394943105,12.559142958299361], zoom_start=12)
 
     # apply geoJSON overlay on the map
-    map.choropleth(geo_data=cph_map, data=df,
+    map.choropleth(geo_data=cph_map_json, data=df,
                    columns=['index', 'bydel'],
                    key_on='properties.navn',
                    legend_name="Parking per district",

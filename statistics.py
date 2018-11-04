@@ -65,5 +65,6 @@ def private_electric_spots_by_avg_brutto_income(parking_df, brutto_income_df):
     plt.private_electric_avg_income_multi_plot(districts_list, private_by_district_df.tolist(), electric_by_district_df.tolist())
 
 #6. Farvekod på et kort bydelene i København, ud fra den gennemsnitlige bruttoindkomst. Plot markers med private (P) og el-bil-parkeringspladser (EL)
-def plot_and_color_parking_by_private_and_electric(parking_df):
-    plt.plot_geo_json(parking_df)
+def plot_and_color_parking_by_private_and_electric(parking_df, cph_map_json, p_spots_json):
+
+    plt.plot_geo_json(parking_df,cph_map_json, p_spots_json)
