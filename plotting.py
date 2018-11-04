@@ -36,14 +36,14 @@ def private_electric_avg_income_multi_plot(districts_list, private_by_district_l
                  bottom=private_by_district_list)
     
     ax2 = ax1.twinx()
-    ax2.plot(avg_income_per_district.tolist()[:-1], color=red)
+    ax2.plot(avg_income_per_district.tolist(), color=red)
     ax2.set_ylabel('Income per house', color=red)
     fig.tight_layout()
     plt.show()
 
 
 def plot_geo_json(avg_income_df, cph_map_json, private_coor, electric_coor):
-
+    print(avg_income_df)
     # instantiate a Folium map over DK
     map = folium.Map(location=[55.671544394943105,
                                12.559142958299361], zoom_start=12)
@@ -55,7 +55,6 @@ def plot_geo_json(avg_income_df, cph_map_json, private_coor, electric_coor):
                    legend_name="Parking per district",
                    fill_color='YlGn', fill_opacity=0.7, line_opacity=0.2,
                    highlight=True)
-
 
     for plot in private_coor:
         if not plot[0] == 0:
