@@ -42,14 +42,14 @@ def plot_geo_json(data_df):
 
     from_df = data_df[data_df['vejstatus'] == 'Kommunevej']  # Bare til testing, der skal bruges gennemsnit af indkomst pr bydel
     df = from_df['bydel'].value_counts().reset_index()
-
+    
     # instantiate a Folium map over DK
     map = folium.Map(location=[55.671544394943105,12.559142958299361], zoom_start=12)
 
     # apply geoJSON overlay on the map
     map.choropleth(geo_data=cph_map, data=df,
                    columns=['index', 'bydel'],
-                   key_on='feature.id',
+                   key_on='properties.navn',
                    legend_name="Parking per district",
                    fill_color='YlGn', fill_opacity=0.7, line_opacity=0.2,
                    highlight=True)
