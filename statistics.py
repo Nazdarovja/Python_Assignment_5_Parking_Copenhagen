@@ -51,3 +51,12 @@ def private_public_spots_per_district(parking_df):
     
     # Plot
     plt.plot_bar(public_percentile, private_percentile, public_by_district_df.index.tolist())
+
+#5. Vis fordelingen af private parkeringspladser og parkeringsmuligheder for el-biler ift hver bydels gennemsnitlige bruttoindkomst.
+def private_electric_spots_by_avg_brutto_income(parking_df, brutto_income_df):
+    """
+    Given parking_df and brutto_income_df returns a multi plot with private and electric parking as stacked bar plots,
+    and a line plot with the avg brutto income of citizens per district.
+    """
+    private_by_district_df = parking_df[parking_df['vejstatus'] == 'Privat fællesvej'].groupby('bydel')['antal_pladser'].agg(np.sum)
+    electric_by_district_df = parking_df[parking_df['p_ordning'] == 'El-Bil plads'].groupby('bydel')['antal_pladser'].agg(np.sum)
