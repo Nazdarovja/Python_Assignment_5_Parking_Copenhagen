@@ -7,7 +7,6 @@ import folium as folium
 Plotting module used in statistics.py
 """
 
-
 def plot_bar(public_percentile_list, private_percentile_list, districts_list):
     """
     Given lists with percentiles, and a list of districts, plots a stacked bar-plot with data
