@@ -15,20 +15,22 @@ Brutto income : https://data.kk.dk/dataset/e734af29-4e40-4754-9cce-789a7513dd8a/
 ## How to run (from CLI)
 In root of folder, in your terminal of choice, write:
 
+This project requires Anaconda distribution of python
+
 > To run project
 ```python main.py```
 
 
 ## Results
 
-
-## Assignments:
-
 1. Hvor mange p-pladser er der i Indre By? 
     - Hvilken vej har flest?
 
+    *There is 12183 in `Indre By` and the street with most spots is Stockholmsgade with 291 spots*
 2. Er der i København flest p-pladser i den side af vejen med lige eller ulige husnumre?
-    - Hvilken side har flest afmærkede parkeringsbåse?
+    *There are 13381 even spots and 12168 uneven spots in Copenhagen; Most spots at the even side of the road.*
+- Hvilken side har flest afmærkede parkeringsbåse?
+    *- There are 2837 even marked spots and 7114 uneven marked spots; Most marked spots at the uneven side of the road.*
 
 3. Vis med et splittet bar-plot den procentvise fordeling(y-aksen) af private og offentlige p-pladser i hver by-del(x-aksen)
     >Inkludér brutto indkomst dataset
