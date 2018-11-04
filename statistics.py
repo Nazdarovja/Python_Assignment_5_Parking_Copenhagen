@@ -33,4 +33,12 @@ def parity_roadside_spots_in_copenhagen(parking_df):
     even_marked_parking = even[even['p_type'] == 'Afmærket parkering']
     uneven_marked_parking = uneven[uneven['p_type'] == 'Uafmærket parkering']
     return (len(even), len(uneven), len(even_marked_parking), len(uneven_marked_parking))
+
+#3. Vis med et splittet bar-plot den procentvise fordeling(y-aksen) af private og offentlige p-pladser i hver by-del(x-aksen)
+def private_public_spots_per_district(parking_df):
+    # private = spots_in_centre_df.groupby('bydel')['antal_pladser'].agg(np.sum).nlargest(1) 
+    public_df = parking_df[parking_df['vejstatus'] == 'Kommunevej']
+    private_df = parking_df[parking_df['vejstatus'] == 'Privat fællesvej']
+    public_by_district_df = public_df.groupby('bydel')['antal_pladser'].agg(np.sum)
+    private_by_district_df = private_df.groupby('bydel')['antal_pladser'].agg(np.sum)
     

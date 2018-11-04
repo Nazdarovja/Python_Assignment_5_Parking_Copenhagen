@@ -30,6 +30,8 @@ if __name__ == '__main__':
 
 #3. Vis med et splittet bar-plot den procentvise fordeling(y-aksen) af private og offentlige p-pladser i hver by-del(x-aksen)
 
+    statistics.private_public_spots_per_district(parking_df)
+
 #4. Hvilken familietype har de bedste parkeringsmuligheder?
 
 #5. Vis fordelingen af private parkeringspladser og parkeringsmuligheder for el-biler ift hver bydels gennemsnitlige bruttoindkomst.
