@@ -52,3 +52,4 @@ if __name__ == '__main__':
 
 #6. Farvekod på et kort bydelene i København, ud fra den gennemsnitlige bruttoindkomst. Plot markers med private (P) og el-bil-parkeringspladser (EL)
     statistics.plot_and_color_parking_by_private_and_electric(parking_df, brutto_income_df, cph_map_json)
+    print('The map plot is in root of folder named plots_6.html (open in browser REAAAALLY SLOW, but works dont panic)')

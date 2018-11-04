@@ -20,6 +20,8 @@ This project requires Anaconda distribution of python
 > To run project
 ```python main.py```
 
+**OBS WHEN OPENING THE HTML FILE IT IS REALLY SLOW AND JUST PRESS WAIT DONT CLOSE IT**
+
 
 ## Results
 
