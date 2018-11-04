@@ -36,7 +36,7 @@ def private_electric_avg_income_multi_plot(districts_list, private_by_district_l
     ax2.plot(avg_income_per_district, color=red)
     ax2.set_ylabel('Income per house', color=red)
     fig.tight_layout()
-    plt.xticks(rotation=75)
+    plt.title('Private- & Electiccar parking\n and average citizen income')
     plt.show()
 
 

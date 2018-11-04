@@ -33,10 +33,17 @@ This project requires Anaconda distribution of python
     *- There are 2837 even marked spots and 7114 uneven marked spots; Most marked spots at the uneven side of the road.*
 
 3. Vis med et splittet bar-plot den procentvise fordeling(y-aksen) af private og offentlige p-pladser i hver by-del(x-aksen)
-    >Inkludér brutto indkomst dataset
+
+![alt text](plot_3.PNG)
 
 4. Hvilken familietype har de bedste parkeringsmuligheder?
 
+ **IKKE RIGTIG DATA TIL AT LAVE DENNE PLOT**
+ 
 5. Vis fordelingen af private parkeringspladser og parkeringsmuligheder for el-biler ift hver bydels gennemsnitlige bruttoindkomst.
 
+![alt text](plot_5.PNG)
+
 6. Farvekod på et kort bydelene i København, ud fra den gennemsnitlige bruttoindkomst. Plot markers med private (P) og el-bil-parkeringspladser (EL)
+
+![alt text](plot_6.PNG)
