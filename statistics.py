@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import plotting as plt
 """
 Methods to handle statistics and plots.
 """
@@ -42,3 +43,4 @@ def private_public_spots_per_district(parking_df):
     public_by_district_df = public_df.groupby('bydel')['antal_pladser'].agg(np.sum)
     private_by_district_df = private_df.groupby('bydel')['antal_pladser'].agg(np.sum)
     
+    plt.plot_bar(public_by_district_df, private_by_district_df)
