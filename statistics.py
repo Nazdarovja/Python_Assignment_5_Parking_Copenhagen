@@ -62,7 +62,7 @@ def private_electric_spots_by_avg_brutto_income(parking_df, brutto_income_df):
     electric_by_district_df = parking_df[parking_df['p_ordning'] == 'El-Bil plads'].groupby('bydel')['antal_pladser'].agg(np.sum)
     districts_list = private_by_district_df.index.tolist()
     avg_income_per_district = calculate_income_per_district(brutto_income_df, True)
-    print(avg_income_per_district)
+    # print(avg_income_per_district)
     plt.private_electric_avg_income_multi_plot(districts_list, private_by_district_df.tolist(), electric_by_district_df.tolist(), avg_income_per_district)
 
 #6. Farvekod på et kort bydelene i København, ud fra den gennemsnitlige bruttoindkomst. Plot markers med private (P) og el-bil-parkeringspladser (EL)
@@ -76,7 +76,7 @@ def plot_and_color_parking_by_private_and_electric(parking_df, brutto_income_df,
 
     # Create avg income df
     avg_income_df = calculate_income_per_district(brutto_income_df, False)
-    print(avg_income_df)
+    # print(avg_income_df)
 
     plt.plot_geo_json(avg_income_df,cph_map_json, private_coor_list, electric_coor_list)
 
@@ -125,17 +125,23 @@ def calculate_income_per_district(brutto_income_df, sorted=False):
 
     # uses the dictionary above to create a numeric value for the average income
     brutto_income_df['average_income'] = pd.Series([income_groups[value] for _, value in brutto_income_df['BRUTTOINDKOM'].iteritems()])
-    # Sort alphabeticly for one use case of the method
-    if sorted:
-        print("WWWWWWWWWAAAAAAAAAAAAZZZZZZZZZZAAAAAAAAAAAAAAAAAAAAAAaa")
-        brutto_income_df = brutto_income_df.sort_values(by='DISTRIKTSNAVN')
+    
     # Calculates to sum of all "hustande"'s income for each line
     brutto_income_df['income_times_houses'] = brutto_income_df['average_income'] * brutto_income_df['HUSTANDE']
-    print(brutto_income_df.head())
 
     # Calculates the amount of houses per district
     houses_per_district = brutto_income_df.groupby('BYDEL')['HUSTANDE'].sum()
     # Calculates the sum of an entire district's income
     income_sum_per_district = brutto_income_df.groupby('BYDEL')['income_times_houses'].sum()
     # Returns the average income for each district
-    return income_sum_per_district / houses_per_district
+    res = income_sum_per_district / houses_per_district
+    # Sort alphabeticly for one use case of the method
+    if sorted:
+        res = res.values
+        placings = [10,9,8,7,1,3,5,6,4,2]
+        temp = [None] * 10
+        for i in range(10):
+            temp[i] = res[int(placings[i]-1)]
+        res = temp
+        
+    return res

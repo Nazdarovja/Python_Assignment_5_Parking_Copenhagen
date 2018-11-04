@@ -26,7 +26,6 @@ def plot_bar(public_percentile_list, private_percentile_list, districts_list):
 
 
 def private_electric_avg_income_multi_plot(districts_list, private_by_district_list, electric_by_district_list, avg_income_per_district):
-    print(avg_income_per_district)
     red = 'tab:red'
     blue = 'tab:blue'
     fig, ax1 = plt.subplots()
@@ -36,7 +35,7 @@ def private_electric_avg_income_multi_plot(districts_list, private_by_district_l
                  bottom=private_by_district_list)
     
     ax2 = ax1.twinx()
-    ax2.plot(avg_income_per_district.tolist(), color=red)
+    ax2.plot(avg_income_per_district, color=red)
     ax2.set_ylabel('Income per house', color=red)
     fig.tight_layout()
     plt.show()
