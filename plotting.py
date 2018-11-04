@@ -1,11 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import folium as folium
-
 """
 Plotting module used in statistics.py
 """
-
 
 def plot_bar(public_percentile_list, private_percentile_list, districts_list):
     """

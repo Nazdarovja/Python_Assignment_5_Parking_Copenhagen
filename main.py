@@ -29,19 +29,19 @@ if __name__ == '__main__':
         cph_map_json = json.load(data_file)
 
 #1. Hvor mange p-pladser er der i Indre By? 
-    # spot_count, street, street_count = statistics.spots_in_cetre_of_town(parking_df)
+    spot_count, street, street_count = statistics.spots_in_cetre_of_town(parking_df)
 #    - Hvilken vej har flest?
-    # print(f'There is {spot_count} in `Indre By` and the street with most spots is {street} with {street_count} spots')
+    print(f'There is {spot_count} in `Indre By` and the street with most spots is {street} with {street_count} spots')
     
 #2. Er der i København flest p-pladser i den side af vejen med lige eller ulige husnumre?
 #    - Hvilken side har flest afmærkede parkeringsbåse?
-    # even, uneven,even_marked_parking,uneven_marked_parking = statistics.parity_roadside_spots_in_copenhagen(parking_df)
-    # print(f'There are {even} even spots and {uneven} uneven spots in Copenhagen; Most spots at the even side of the road.')
-    # print(f'- There are {even_marked_parking} even marked spots and {uneven_marked_parking} uneven marked spots; Most marked spots at the uneven side of the road.')
+    even, uneven,even_marked_parking,uneven_marked_parking = statistics.parity_roadside_spots_in_copenhagen(parking_df)
+    print(f'There are {even} even spots and {uneven} uneven spots in Copenhagen; Most spots at the even side of the road.')
+    print(f'- There are {even_marked_parking} even marked spots and {uneven_marked_parking} uneven marked spots; Most marked spots at the uneven side of the road.')
 
 #3. Vis med et splittet bar-plot den procentvise fordeling(y-aksen) af private og offentlige p-pladser i hver by-del(x-aksen)
 
-    # statistics.private_public_spots_per_district(parking_df)
+    statistics.private_public_spots_per_district(parking_df)
 
 #4. Hvilken familietype har de bedste parkeringsmuligheder?
 
