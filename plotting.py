@@ -19,3 +19,11 @@ def plot_bar(public_percentile_list,private_percentile_list, districts_list):
     plt.xticks(rotation=75)
     # Show plot
     plt.show()
+
+def private_electric_avg_income_multi_plot(districts_list, private_by_district_list, electric_by_district_list):
+
+    p1 = plt.bar(districts_list, private_by_district_list)
+    p2 = plt.bar(districts_list, electric_by_district_list, bottom=private_by_district_list)
+
+    plt.show()
+    
