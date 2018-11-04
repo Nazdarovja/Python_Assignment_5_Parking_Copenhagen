@@ -37,10 +37,17 @@ def parity_roadside_spots_in_copenhagen(parking_df):
 
 #3. Vis med et splittet bar-plot den procentvise fordeling(y-aksen) af private og offentlige p-pladser i hver by-del(x-aksen)
 def private_public_spots_per_district(parking_df):
-    # private = spots_in_centre_df.groupby('bydel')['antal_pladser'].agg(np.sum).nlargest(1) 
-    public_df = parking_df[parking_df['vejstatus'] == 'Kommunevej']
-    private_df = parking_df[parking_df['vejstatus'] == 'Privat fællesvej']
-    public_by_district_df = public_df.groupby('bydel')['antal_pladser'].agg(np.sum)
-    private_by_district_df = private_df.groupby('bydel')['antal_pladser'].agg(np.sum)
+    """
+    Given pandas df, returns a barplot with percentage of types of parkingspots per district
+    """
+    # Sort by vejstatus, then group by city districts, and sum all of the parking spots (first public then private)
+    public_by_district_df = parking_df[parking_df['vejstatus'] == 'Kommunevej'].groupby('bydel')['antal_pladser'].agg(np.sum)
+    private_by_district_df = parking_df[parking_df['vejstatus'] == 'Privat fællesvej'].groupby('bydel')['antal_pladser'].agg(np.sum)
     
-    plt.plot_bar(public_by_district_df, private_by_district_df)
+    # Calculate the percentile for plotting
+    totals = [i+j for i,j in zip(public_by_district_df.tolist(), private_by_district_df.tolist())]  # Total spots
+    public_percentile = [i/j * 100 for i,j in zip(public_by_district_df.tolist(), totals)]          # % of public spots
+    private_percentile = [i/j * 100 for i,j in zip(private_by_district_df.tolist(), totals)]        # % of private spots
+    
+    # Plot
+    plt.plot_bar(public_percentile, private_percentile, public_by_district_df.index.tolist())
