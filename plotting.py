@@ -43,7 +43,6 @@ def private_electric_avg_income_multi_plot(districts_list, private_by_district_l
 
 
 def plot_geo_json(avg_income_df, cph_map_json, private_coor, electric_coor):
-    print(avg_income_df)
     # instantiate a Folium map over DK
     map = folium.Map(location=[55.671544394943105,
                                12.559142958299361], zoom_start=12)
