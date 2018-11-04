@@ -51,3 +51,7 @@ def private_public_spots_per_district(parking_df):
     
     # Plot
     plt.plot_bar(public_percentile, private_percentile, public_by_district_df.index.tolist())
+
+#6. Farvekod på et kort bydelene i København, ud fra den gennemsnitlige bruttoindkomst. Plot markers med private (P) og el-bil-parkeringspladser (EL)
+def plot_and_color_parking_by_private_and_electric(parking_df):
+    plt.plot_geo_json(parking_df)
