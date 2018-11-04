@@ -13,25 +13,20 @@ URL_P_BYDEL_GEOJSON = 'http://wfs-kbhkort.kk.dk/k101/ows?service=WFS&version=1.0
 PARKING_DATA_FILE_NAME = 'parking_data.csv'
 BRUTTO_INCOME_FILE_NAME = 'brutto_income.csv'
 GEOJSON_BYDELE_FILE_NAME = 'geo_json_bydele.json'
-GEOJSON_P_PLADSER_FILE_NAME = 'geo_json_p_pladser.json'
 
 if __name__ == '__main__':
     download_as_file(URL_PARKING_DATA, PARKING_DATA_FILE_NAME)
     download_as_file(URL_BRUTTO_INCOME_DATA, BRUTTO_INCOME_FILE_NAME)
     download_as_file(URL_P_BYDEL_GEOJSON, GEOJSON_BYDELE_FILE_NAME)
-    download_as_file(URL_P_PLADSER_GEOJSON, GEOJSON_P_PLADSER_FILE_NAME)
 
     ## read the csv files to dataframes, filter away all error prone lines.
     parking_df = pd.read_csv(PARKING_DATA_FILE_NAME, encoding='utf-8', low_memory=False, error_bad_lines=False)
     brutto_income_df = pd.read_csv(BRUTTO_INCOME_FILE_NAME, encoding='utf-8', low_memory=False, error_bad_lines=False)
-    
+
     ## Read json files to memory
     # load GeoJSON geometries for Copenhagen
     with open(GEOJSON_BYDELE_FILE_NAME) as data_file:
         cph_map_json = json.load(data_file)
-
-    with open(GEOJSON_P_PLADSER_FILE_NAME) as data_file:
-        p_spots_json = json.load(data_file)
 
 #1. Hvor mange p-pladser er der i Indre By? 
     spot_count, street, street_count = statistics.spots_in_cetre_of_town(parking_df)
@@ -54,4 +49,4 @@ if __name__ == '__main__':
     # statistics.private_electric_spots_by_avg_brutto_income(parking_df, brutto_income_df)
 
 #6. Farvekod på et kort bydelene i København, ud fra den gennemsnitlige bruttoindkomst. Plot markers med private (P) og el-bil-parkeringspladser (EL)
-    statistics.plot_and_color_parking_by_private_and_electric(parking_df, cph_map_json, p_spots_json)
+    statistics.plot_and_color_parking_by_private_and_electric(parking_df, brutto_income_df, cph_map_json)

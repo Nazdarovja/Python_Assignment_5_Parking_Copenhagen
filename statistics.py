@@ -61,10 +61,56 @@ def private_electric_spots_by_avg_brutto_income(parking_df, brutto_income_df):
     private_by_district_df = parking_df[parking_df['vejstatus'] == 'Privat fællesvej'].groupby('bydel')['antal_pladser'].agg(np.sum)
     electric_by_district_df = parking_df[parking_df['p_ordning'] == 'El-Bil plads'].groupby('bydel')['antal_pladser'].agg(np.sum)
     districts_list = private_by_district_df.index.tolist()
-    
+        
     plt.private_electric_avg_income_multi_plot(districts_list, private_by_district_df.tolist(), electric_by_district_df.tolist())
 
 #6. Farvekod på et kort bydelene i København, ud fra den gennemsnitlige bruttoindkomst. Plot markers med private (P) og el-bil-parkeringspladser (EL)
-def plot_and_color_parking_by_private_and_electric(parking_df, cph_map_json, p_spots_json):
+def plot_and_color_parking_by_private_and_electric(parking_df, brutto_income_df, cph_map_json):
+    private_spots_df = parking_df[parking_df['vejstatus'] == 'Privat fællesvej']
+    electric_spots_df = parking_df[parking_df['p_ordning'] == 'El-Bil plads']
 
-    plt.plot_geo_json(parking_df,cph_map_json, p_spots_json)
+    # Creates lists of tuples with coordinates ex. (12.333, 32.34343)
+    private_coor_list = private_spots_df['wkb_geometry'].apply(create_coordinates)
+    electric_coor_list = electric_spots_df['wkb_geometry'].apply(create_coordinates)
+
+    # Create avg income df
+    avg_income_df = calculate_income_per_district(brutto_income_df)
+    # TBD NEEDS CHANGES (parking_df is for testing)
+    plt.plot_geo_json(avg_income_df,cph_map_json, private_coor_list, electric_coor_list)
+
+
+def create_coordinates(row): 
+    row = str(row)
+    if len(row) > 10:
+        row = row.replace('(','').split(' ')
+        row[2] = row[2].replace(',','')
+        x = float(row[1])
+        y = float(row[2])
+        return (x,y)
+
+
+def calculate_income_per_district(brutto_income_df):
+    income_groups = {
+        '1': 25000,
+        '2': 75000,
+        '3': 125000,
+        '4': 175000,
+        '5': 250000,
+        '6': 350000,
+        '7': 450000,
+        '8': 550000,
+        '9': 650000,
+        '10': 700000
+    }
+
+    # uses the dictionary above to create a numeric value for the average income
+    brutto_income_df['average_income'] = pd.Series([income_groups[str(value)] for _, value in brutto_income_df['BRUTTOINDKOM'].iteritems()])
+    # Calculates to sum of all "hustande"'s income for each line
+    brutto_income_df['income_times_houses'] = brutto_income_df.average_income * brutto_income_df.HUSTANDE
+
+    # Calculates the amount of houses per district
+    houses_per_district = brutto_income_df.groupby('BYDEL')['HUSTANDE'].sum() 
+    # Calculates the sum of an entire district's income
+    income_sum_per_district = brutto_income_df.groupby('BYDEL')['income_times_houses'].agg(np.sum) 
+    # Returns the average income for each district
+    return income_sum_per_district / houses_per_district
