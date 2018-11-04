@@ -39,6 +39,7 @@ if __name__ == '__main__':
 #4. Hvilken familietype har de bedste parkeringsmuligheder?
 
 #5. Vis fordelingen af private parkeringspladser og parkeringsmuligheder for el-biler ift hver bydels gennemsnitlige bruttoindkomst.
+    statistics.private_electric_spots_by_avg_brutto_income(parking_df, brutto_income_df)
 
 #6. Farvekod på et kort bydelene i København, ud fra den gennemsnitlige bruttoindkomst. Plot markers med private (P) og el-bil-parkeringspladser (EL)
     statistics.plot_and_color_parking_by_private_and_electric(parking_df)
