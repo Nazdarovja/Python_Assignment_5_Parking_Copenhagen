@@ -24,3 +24,13 @@ def spots_in_cetre_of_town(parking_df):
     street = spots_in_centre_df.groupby('vejnavn')['antal_pladser'].agg(np.sum).nlargest(1) 
     ## create return tuple (middle value is complex because the value is the index value of the df... could probably been prettier)
     return (spot_sum, street.index.tolist()[0], street[0])
+
+#2. Er der i København flest p-pladser i den side af vejen med lige eller ulige husnumre?
+def parity_roadside_spots_in_copenhagen(parking_df):
+    even = parking_df[parking_df['vejside']  == 'Lige husnr.']
+    uneven = parking_df[parking_df['vejside']  == 'Ulige husnr.']
+    # - Hvilken side har flest afmærkede parkeringsbåse?
+    even_marked_parking = even[even['p_type'] == 'Afmærket parkering']
+    uneven_marked_parking = uneven[uneven['p_type'] == 'Uafmærket parkering']
+    return (len(even), len(uneven), len(even_marked_parking), len(uneven_marked_parking))
+    
