@@ -87,6 +87,7 @@ def create_coordinates(row):
         x = float(row[1])
         y = float(row[2])
         return (x,y)
+    return (0,0)
 
 
 def calculate_income_per_district(brutto_income_df):
